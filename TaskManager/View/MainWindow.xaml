@@ -1,0 +1,53 @@
+﻿<Window x:Class="TaskManager.View.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TaskManager.View"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Title="Task Manager" Background="Gray" Height="450" Width="1000">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+
+        <DataGrid x:Name="TaskGrid" Grid.Row="1" Grid.Column="0" Margin="10" ItemsSource="{Binding Tasks}" AutoGenerateColumns="False" SelectedItem="{Binding SelectedTask, Mode=TwoWay}">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Header=" " Width="50">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay}" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="ID" Binding="{Binding ID}" Width="100"/>
+                <DataGridTextColumn Header="Title" Binding="{Binding Title}" Width="100"/>
+                <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="100"/>
+                <DataGridTextColumn Header="Due Date" Binding="{Binding DueDate, StringFormat=dd/MM/yyyy}" Width="120"/>
+                <DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <materialDesign:Card Grid.Row="1" Grid.Column="1" Margin="10">
+            <StackPanel Margin="10">
+                <Button x:Name="AddTaskButton" Content="Add Task" Click="AddTask_Click" Height="31" Width="242" Margin="0,10,0,0"/>
+                <Button x:Name="EditTaskButton" Content="Edit Task" Click="EditTask_Click" IsEnabled="False" Height="31" Width="242" Margin="0,10,0,0" />
+                <Button x:Name="DeleteTaskButton" Content="Delete Task" Click="DeleteTask_Click" IsEnabled="False" Height="31" Width="242" Margin="0,10,0,0"/>
+                <Label Content="Filter Tasks by Status" Margin="0,20,0,5"/>
+                <StackPanel Orientation="Horizontal">
+                    <RadioButton x:Name="AllRadioButton" Content="All" Margin="0,0,10,0" IsEnabled="False" Checked="StatusRadioButton_Checked"/>
+                    <RadioButton x:Name="PendingRadioButton" Content="Pending" Margin="0,0,10,0" IsEnabled="False" Checked="StatusRadioButton_Checked"/>
+                    <RadioButton x:Name="InProgressRadioButton" Content="In Progress" Margin="0,0,10,0" IsEnabled="False" Checked="StatusRadioButton_Checked"/>
+                    <RadioButton x:Name="CompletedRadioButton" Content="Completed" IsEnabled="False" Checked="StatusRadioButton_Checked" />
+                </StackPanel>
+            </StackPanel>
+        </materialDesign:Card>
+    </Grid>
+</Window>
