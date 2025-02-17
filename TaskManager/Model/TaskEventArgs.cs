@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace TaskManager.Model
+﻿namespace TaskManager.Model
 {
     public class TaskEventArgs : EventArgs
     {
@@ -18,7 +12,6 @@ namespace TaskManager.Model
         public int ID { get; set; }
         public String Title { get; set; }
         public String Description { get; set; }
-
         public DateTime DueDate { get; set; }
         public enum StatusList
         {
@@ -26,6 +19,7 @@ namespace TaskManager.Model
             InProgress,
             Completed
         }
+
         public String Status { get; set; }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -15,7 +14,6 @@ namespace TaskManager.View
     {
         public ObservableCollection<TaskModel> Tasks { get; set; }
         public TaskModel SelectedTask { get; set; }
-
         private int taskId = 0;
         private ICollectionView TaskStatusView { get; set; }
         public MainWindow()
@@ -26,6 +24,7 @@ namespace TaskManager.View
             taskId = 1;
             TaskStatusView = CollectionViewSource.GetDefaultView(Tasks);
         }
+
         public bool IsTasksEmpty => !Tasks.Any();
 
         private void AddTask_Click(object sender, RoutedEventArgs e)
@@ -34,6 +33,7 @@ namespace TaskManager.View
             addTask.TaskAdded += AddTaskWindow_TaskAdded;
             addTask.ShowDialog();
         }
+
         private void EditTask_Click(object sender, RoutedEventArgs e)
         {
             if (SelectedTask != null)
@@ -139,5 +139,6 @@ namespace TaskManager.View
                 FilterTasks(status);
             }
         }
+
     }
 }
